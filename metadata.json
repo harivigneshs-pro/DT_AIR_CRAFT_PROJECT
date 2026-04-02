@@ -1,0 +1,5 @@
+{
+  "name": "Aircraft SAR Optimization Dashboard",
+  "description": "A professional search and rescue optimization tool for calculating aircraft glide ranges and search zones based on altitude and wind conditions.",
+  "requestFramePermissions": []
+}
