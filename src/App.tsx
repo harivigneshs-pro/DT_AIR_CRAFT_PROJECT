@@ -106,6 +106,7 @@ export default function App() {
   const [lkp, setLkp] = useState<LKP | null>(null);
   const [showPatterns, setShowPatterns] = useState(false);
   const [logs, setLogs] = useState<LogEntry[]>([]);
+
   const [isCalculating, setIsCalculating] = useState(false);
   const [searchData, setSearchData] = useState<any>(null);
   const [activeAssets, setActiveAssets] = useState<Asset[]>([]);
@@ -312,6 +313,8 @@ export default function App() {
     return () => clearInterval(interval);
   }, [missionStartTime, chatterIndex, addLog]);
 
+  if (!isAuthenticated) return <Login onLogin={() => setIsAuthenticated(true)} />;
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-emerald-500/30 flex flex-col">
       {/* Dynamic Header */}
@@ -419,8 +422,6 @@ export default function App() {
                 Add Custom Profile
               </button>
             </div>
-
-            {/* Dynamic SVG Chart */}
             <div className="relative h-20 w-full bg-slate-900 border border-slate-700/50 rounded-lg overflow-hidden group">
               <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
                 <path d="M 0 10 L 100 80 L 0 80 Z" fill="rgba(16,185,129,0.1)" />
@@ -489,7 +490,7 @@ export default function App() {
                 ))}
 
                 {showPatterns && (
-                  <Polyline positions={generateExpandingSquare()} color="#0ea5e9" weight={3} dashArray="8, 8" opacity={0.8} />
+                  <Polyline positions={generateExpandingSquare()} pathOptions={{ color: '#0ea5e9', weight: 3, dashArray: '8, 8', opacity: 0.8 }} />
                 )}
               </>
             )}
